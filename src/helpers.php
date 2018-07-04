@@ -2,7 +2,7 @@
 
 if (! function_exists('fof')) {
     /**
-     * Auto first or fail, When pass class and id.
+     * Auto find or fail, When pass class and id.
      *
      * @param string $class
      * @param \Illuminate\Database\Eloquent\Model|int $value
@@ -14,6 +14,6 @@ if (! function_exists('fof')) {
             return $value;
         }
 
-        return $class::where('id', $value)->firstOrFail();
+        return $class::findOrFail($value);
     }
 }
