@@ -7,13 +7,17 @@ if (! function_exists('fof')) {
      * @param string $class
      * @param \Illuminate\Database\Eloquent\Model|int $value
      * @return mixed
+     *
+     * @throws Exception
      */
     function fof($class, $value)
     {
         if ($value instanceof $class) {
             return $value;
+        } elseif (ctype_digit($value)) {
+            return $class::findOrFail($value);
         }
 
-        return $class::findOrFail($value);
+        throw new Exception("Class \"{$class}\" or value \"{$value}\" was not correct.");
     }
 }
